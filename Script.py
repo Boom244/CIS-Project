@@ -6,7 +6,7 @@
 
 from flask import Flask, render_template, Response
 import cv2
-import GPIO
+import RPi.GPIO
 
 app = Flask(__name__)
 #app.config["CACHE_TYPE"] = "null"
