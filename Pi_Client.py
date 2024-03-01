@@ -21,14 +21,14 @@ if os.path.exists("recv-server.txt"):
     print("Loading settings:")
     config = open("recv-server.txt").readlines()
     HOST = config[0]
-    PORT = config[1]
+    PORT = int(config[1])
 else:
     HOST = input("Config not found. Input host IP:")
     PORT = input("Port:")
     file = open("recv-server.txt","x")
     file.write(HOST)
     file.write(PORT)
-    PORT = str(PORT)
+    PORT = int(PORT)
 
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     s.bind((HOST,PORT))
