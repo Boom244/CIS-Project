@@ -1,1 +1,1 @@
-git pull && python Script.py
+git pull && mediamtx && python Script.py
