@@ -2,18 +2,12 @@
 
 <head>
     <title>PiCam Server</title>
-    <link rel="stylesheet" href='../static/style.css'/>
+    <link rel="stylesheet" href='style.css'/>
+    <script src="script.js"></script>
 </head>
 
-<body>
-    
-        <h1>PiCam Live Streaming</h1>
-        
-        <div class="img-container">
-            <img src="{{ url_for('video_feed') }}">
-        </div>
-        <footer>AranaCorp All right reserved &#169;</footer>
-        
+<body>    
+    <iframe src="http://10.84.3.157:7777/mystream" width=640 height=480 scrolling="no"></iframe>
 </body>
 
 </html>
