@@ -14,8 +14,7 @@ GPIO.setup(18, GPIO.OUT)
 
 async def process_input(websocket):
 	msg = await websocket.recv()
-	print(f"<<< {msg}")
-	await websocket.send(f"Message ({msg}) received")
+	await websocket.send(f"Input latency: {round(time.time() * 1000) - msg}")
 
 async def main():
     async with serve(process_input, "10.84.3.157", 5446):
