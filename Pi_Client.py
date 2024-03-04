@@ -12,13 +12,13 @@ GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 GPIO.setup(18, GPIO.OUT)
 
-async def echo(websocket):
-    async for message in websocket:
-        print(message)
-        await websocket.send(message)
+async def process_input(websocket):
+	msg = await websocket.recv()
+	print(f"<<< {msg}")
+	await websocket.send(f"Message ({msg}) received")
 
 async def main():
-    async with serve(echo, "10.84.3.157", 5446):
-        await asyncio.get_running_loop().create_future()  # run forever
+    async with serve(process_input, "10.84.3.157", 5446):
+        await asyncio.Future()  # run forever
 
 asyncio.run(main())
