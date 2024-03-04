@@ -29,6 +29,7 @@ else:
     file.write(HOST)
     file.write(PORT)
 
+
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     s.bind((HOST,int(PORT)))
     s.listen()
@@ -38,7 +39,7 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         while True:
             data = conn.recv(1024)
             if data:
-                print("Connected to server")
+                print("Connected to server, latency: " + str(round(time.time() * 1000) - data) + " ms")
                 GPIO.output(18, GPIO.HIGH)
                 time.sleep(1)
                 GPIO.output(18, GPIO.LOW)
