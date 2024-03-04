@@ -14,6 +14,7 @@ GPIO.setup(18, GPIO.OUT)
 
 async def echo(websocket):
     async for message in websocket:
+        print(message)
         await websocket.send(message)
 
 async def main():
