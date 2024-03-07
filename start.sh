@@ -1,1 +1,3 @@
-git pull && mediamtx && python Script.py
+git pull
+python Pi_Client.py &
+mediamtx &
