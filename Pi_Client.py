@@ -9,11 +9,12 @@ import asyncio
 import time
 import subprocess
 from threading import Thread
-bool = False
-
+left = False
+right = False
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 GPIO.setup(17, GPIO.OUT)
+GPIO.setup(27, GPIO.OUT)
 
 def MTX_Setup():
 	subprocess.run(["mediamtx"])
@@ -25,16 +26,20 @@ async def process_input(websocket):
 	global bool
 	while True:
 		async for msg in websocket:
-			if (msg == "HIGH"):
-				if not bool:
-					bool = True
-					GPIO.output(17,GPIO.HIGH)
-					print("Set High")
-			else:
-				if bool:
-					bool = False
-					GPIO.output(17,GPIO.LOW)
-					print("Set Low")
+			highbuffer = []
+			lowbuffer = []
+			if msg == "FORWARD":
+				highbuffer.append(17)
+				highbuffer.append(27)
+			elif msg == "LEFT":
+				lowbuffer.append(17)
+				highbuffer.append(27)
+			elif msg == "RIGHT":
+				lowbuffer.append(27)
+				highbuffer.append(17)
+			elif msg == "STOP":
+				highbuffer.append(17)
+				highbuffer.append(27)
 
 
 loop = asyncio.get_event_loop()

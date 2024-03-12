@@ -1,5 +1,5 @@
 connSocket = new WebSocket("ws://10.84.3.157:5446")
-
+lastSendval = null
 document.getElementById("pingbutton").addEventListener("click", (event) => {
   connSocket.send(Date.now());
 });
@@ -9,12 +9,31 @@ connSocket.onmessage = function(event) {
 };
 
 document.addEventListener("keydown",function(event){
-  connSocket.send("HIGH")
-  console.log("HIGH")
+  sendval = null;
+  switch(event.key)
+  {
+    case "w":
+      sendval = "FORWARD";
+      break;
+    case "s":
+      sendval = "BACKWARD";
+      break;
+    case "a":
+      sendval = "LEFT";
+      break;
+    case "d":
+      sendval = "RIGHT";
+      break;
+  }
+  if (sendval != lastSendval)
+  {
+    connSocket.send(sendval)
+    lastSendval = sendval
+  }
 });
 
 document.addEventListener("keyup",function(event){
-  connSocket.send("LOW")
-  console.log("LOW")
+  connSocket.send("STOP");
+
 });
 
