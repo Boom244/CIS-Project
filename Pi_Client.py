@@ -8,19 +8,27 @@ from websockets.server import serve
 import asyncio
 import time
 
+bool = False
+
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 GPIO.setup(17, GPIO.OUT)
 
-
 async def process_input(websocket):
+	global bool
 	while True:
 		async for message in websocket:
 			msg = await websocket.recv()
 			if (msg == "HIGH"):
-				GPIO.output(17,GPIO.HIGH)
+				if not bool:
+					bool = True
+					GPIO.output(17,GPIO.HIGH)
+					print("Set High")
 			else:
-				GPIO.output(17,GPIO.LOW)
+				if bool:
+					bool = False
+					GPIO.output(17,GPIO.LOW)
+					print("Set Low")
 
 
 loop = asyncio.get_event_loop()
