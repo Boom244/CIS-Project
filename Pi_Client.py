@@ -7,18 +7,24 @@ import RPi.GPIO as GPIO
 from websockets.server import serve
 import asyncio
 import time
-
+import subprocess
+from threading import Thread
 bool = False
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 GPIO.setup(17, GPIO.OUT)
 
+def MTX_Setup():
+	subprocess.run(["mediamtx"])
+
+Thread(target=MTX_Setup).start()
+
+
 async def process_input(websocket):
 	global bool
 	while True:
-		async for message in websocket:
-			msg = await websocket.recv()
+		async for msg in websocket:
 			if (msg == "HIGH"):
 				if not bool:
 					bool = True
