@@ -10,14 +10,17 @@ import time
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
-GPIO.setup(18, GPIO.OUT)
+GPIO.setup(17, GPIO.OUT)
 
 
 async def process_input(websocket):
-	async for message in websocket:
-		msg = await websocket.recv()
-		print(msg)
-
+	while True:
+		async for message in websocket:
+			msg = await websocket.recv()
+			if (msg == "HIGH"):
+				GPIO.output(17,GPIO.HIGH)
+			else:
+				GPIO.output(17,GPIO.LOW)
 async def main():
     async with serve(process_input, "10.84.3.157", 5446):
         await asyncio.Future()  # run forever

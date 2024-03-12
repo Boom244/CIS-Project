@@ -9,5 +9,10 @@ connSocket.onmessage = function(event) {
 };
 
 document.addEventListener("keydown",function(event){
-  connSocket.send("ACTION:"+event.key)
+  connSocket.send("HIGH")
 });
+
+document.addEventListener("keyup",function(event){
+  connSocket.send("LOW")
+});
+
