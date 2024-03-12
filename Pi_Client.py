@@ -21,8 +21,9 @@ async def process_input(websocket):
 				GPIO.output(17,GPIO.HIGH)
 			else:
 				GPIO.output(17,GPIO.LOW)
-async def main():
-    async with serve(process_input, "10.84.3.157", 5446):
-        await asyncio.Future()  # run forever
 
-asyncio.run(main())
+
+loop = asyncio.get_event_loop()
+server = serve(process_input, '10.84.3.157', 5446)
+loop.run_until_complete(asyncio.gather(server))
+loop.run_forever()
