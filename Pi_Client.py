@@ -40,7 +40,7 @@ async def process_input(websocket):
 			elif msg == "RIGHT":
 				lowbuffer.append(27)
 				highbuffer.append(17)
-			elif msg == "BACKWARDS":
+			elif msg == "BACKWARD":
 				highbuffer.append(22)
 				highbuffer.append(23)
 				lowbuffer.append(17)
