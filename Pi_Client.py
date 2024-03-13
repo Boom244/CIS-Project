@@ -40,9 +40,10 @@ async def process_input(websocket):
 			elif msg == "STOP":
 				highbuffer.append(17)
 				highbuffer.append(27)
-
-			print(highbuffer)
-			print(lowbuffer)
+			print("Activated: " + str(highbuffer))
+			print("Deactivated: " + str(lowbuffer))
+			GPIO.output(highbuffer,GPIO.HIGH)
+			GPIO.output(lowbuffer, GPIO.LOW)
 loop = asyncio.get_event_loop()
 server = serve(process_input, '10.84.3.157', 5446)
 loop.run_until_complete(asyncio.gather(server))

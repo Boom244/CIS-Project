@@ -29,11 +29,13 @@ document.addEventListener("keydown",function(event){
   {
     connSocket.send(sendval)
     lastSendval = sendval
+    console.log(sendval)
   }
 });
 
 document.addEventListener("keyup",function(event){
   connSocket.send("STOP");
-
+  console.log("STOP")
+  lastSendval = "STOP"
 });
 
