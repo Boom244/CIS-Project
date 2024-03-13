@@ -41,7 +41,8 @@ async def process_input(websocket):
 				highbuffer.append(17)
 				highbuffer.append(27)
 
-
+			print(highbuffer)
+			print(lowbuffer)
 loop = asyncio.get_event_loop()
 server = serve(process_input, '10.84.3.157', 5446)
 loop.run_until_complete(asyncio.gather(server))
