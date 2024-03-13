@@ -46,7 +46,9 @@ async def process_input(websocket):
 				lowbuffer.append(17)
 				lowbuffer.append(27)
 			elif msg == "STOP":
-				highbuffer.append(17)
+				lowbuffer.append(22)
+				lowbuffer.append(23)
+				lowbuffer.append(17)
 				lowbuffer.append(27)
 			print("Activated: " + str(highbuffer))
 			print("Deactivated: " + str(lowbuffer))
